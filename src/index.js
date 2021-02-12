@@ -72,5 +72,6 @@ function updateLists(breeds) {
         let newLi = document.createElement('li');
         newLi.innerText = breed;
         newUl.appendChild(newLi);
+        newLi.addEventListener('click', updateColor);
     });
 }
