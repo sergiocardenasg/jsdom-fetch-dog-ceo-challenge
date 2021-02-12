@@ -4,7 +4,7 @@ let breeds = [];
 
 document.addEventListener('DOMContentLoaded', function () {
   loadImages();
-  fetchDogBreeds();
+  loadBreeds();
 });
 
 function loadImages() {
@@ -23,28 +23,17 @@ function addImage(dogPicURL) {
 }
 
 function loadBreeds() {
-  const breedUrl = 'https://dog.ceo/api/breeds/list/all';
-  fetch(breedUrl)
-  .then(resp => resp.json())
-  .then(json => {
-      breeds = Object.keys(json.message);
-      updateBreedList(breeds);
-      addBreedSelectListener();
-    });
-}
-
-function fetchDogBreeds() {
     const breedUrl = 'https://dog.ceo/api/breeds/list/all';
     fetch(breedUrl) 
-    .then(response => response.json()) 
+    .then(resp => resp.json()) 
     .then(json => {
         breeds = Object.keys(json.message)
-        breeds.forEach(breed => renderDogBreeds(breed));
-        updateBreedLists();
+        breeds.forEach(breed => renderBreeds(breed));
+        updateBreeds();
     })
 }
 
-function updateBreedLists() {
+function updateBreeds() {
     let breedDropdown = document.getElementById('breed-dropdown');
     breedDropdown.addEventListener('change', function(event) {
         let letter = event.target.value;
@@ -53,7 +42,7 @@ function updateBreedLists() {
     })
 }
 
-function renderDogBreeds(dogBreed) {
+function renderBreeds(dogBreed) {
     const dogUl = document.getElementById('dog-breeds');
     const createLi = document.createElement('li');
     createLi.innerText = dogBreed;
