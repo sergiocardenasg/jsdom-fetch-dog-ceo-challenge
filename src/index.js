@@ -3,29 +3,31 @@ console.log('%c HI', 'color: firebrick')
 let breeds = [];
 
 document.addEventListener('DOMContentLoaded', function () {
-  loadImages();
-  loadBreeds();
+    loadImages();
+    loadBreeds();
 });
 
 function loadImages() {
-  const imgUrl = "https://dog.ceo/api/breeds/image/random/4";
-  fetch(imgUrl)
-  .then(resp => resp.json())
-  .then(json => {json.message.forEach(img => addImage(img))});
+    const imgUrl = "https://dog.ceo/api/breeds/image/random/4";
+    fetch(imgUrl)
+    .then(response => response.json())
+    .then(json => {
+        json.message.forEach(img => addImage(img))
+    });
 }
 
 function addImage(dogPicURL) {
-  let container = document.querySelector('#dog-image-container');
-  let img = document.createElement('img');
-  img.src = dogPicURL;
-  img.style = 'height: 100px;'
-  container.appendChild(img);
+    let container = document.querySelector('#dog-image-container');
+    let img = document.createElement('img');
+    img.src = dogPicURL;
+    img.style = 'height: 100px;'
+    container.appendChild(img);
 }
 
 function loadBreeds() {
     const breedUrl = 'https://dog.ceo/api/breeds/list/all';
     fetch(breedUrl) 
-    .then(resp => resp.json()) 
+    .then(response => response.json()) 
     .then(json => {
         breeds = Object.keys(json.message)
         breeds.forEach(breed => renderBreeds(breed));
@@ -39,7 +41,7 @@ function updateBreeds() {
         let letter = event.target.value;
         newBreedsList = breeds.filter(breed => breed.startsWith(letter));
         updateLists(newBreedsList);
-    })
+    });
 }
 
 function renderBreeds(dogBreed) {
